@@ -1,0 +1,53 @@
+{% extends 'naissances/layout.html' %}
+
+{% block content %}
+<h1>Liste des Meres...</h1>
+
+<div class="col-12 d-flex justify-content-end mb-2"> <a class="btn btn-primary sm " href="#">
+    Ajouter une mere
+</a>
+</div>
+<table class="table table-bordered table-striped table-hover">
+    <thead class="table-dark">
+        <tr>
+            <th>ID</th>
+            <th>Nom</th>
+            <th>Prenom</th>
+            <th>Genre</th>
+            <th>date de naissance</th>
+            <th>lieu de naissance</th>
+            <th>fonction mere</th>
+            <th>Actions</th>
+        </tr> 
+    </thead>
+    <tbody>
+
+
+       {% for mere  in  meres %}
+            <tr class="success">
+            <td>{{mere.id}}</td>
+            <td>{{mere.nom}}</td>
+            <td>{{mere.prenom}}</td>
+            <td>{{mere.genre}}</td>
+            <td> 
+                <a class="btn btn-outline-primary sm" href="#">
+                    Editer
+              </a>
+
+              <a class="btn btn-outline-danger sm" href="#">
+                Supprimer
+              </a>
+
+              <a class="btn btn-outline-info sm" href="#">
+                Detailes
+            </a>
+
+            </td>
+        </tr>
+        {% endfor %}
+    </tbody>
+
+    
+</table>
+
+{% endblock %}

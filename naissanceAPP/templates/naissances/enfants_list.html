@@ -1,0 +1,54 @@
+{% extends 'naissances/layout.html' %}
+
+{% block content %}
+<h1>Liste des Enfants...</h1>
+
+<div class="col-12 d-flex justify-content-end mb-2"> <a class="btn btn-primary sm " href="{% url 'Ajouter_enfant' %}">
+    Nouvel Enfant
+</a>
+</div>
+<table class="table table-bordered table-striped table-hover">
+    <thead class="table-dark">
+        <tr>
+            <th>ID</th>
+            <th>Nom</th>
+            <th>Prenom</th>
+            <th>Genre</th>
+            <th>date de naissance</th>
+            <th>lieu de naissance</th>
+            <th>Actions</th>
+        </tr> 
+    </thead>
+    <tbody>
+
+
+       {% for enfant  in  enfants %}
+            <tr class="success">
+            <td>{{enfant.id}}</td>
+            <td>{{enfant.nom}}</td>
+            <td>{{enfant.prenom}}</td>
+            <td>{{enfant.genre}}</td>
+            <td>{{enfant.date_naissance}}</td>
+            <td>{{enfant.lieu_naissance}}</td>
+            <td> 
+                <a class="btn btn-outline-primary sm" href="{% url 'editer-enfant' enfant.id %}">
+                    Editer
+              </a>
+
+              <a class="btn btn-outline-danger sm" href="{% url 'supprimer-enfant' enfant.id %}">
+                Supprimer
+              </a>
+
+              <a class="btn btn-outline-info sm" href="{% url 'montrer-enfant' enfant.id %}">
+                Detailes
+            </a>
+
+            </td>
+        </tr>
+        {% endfor %}
+    </tbody>
+
+    
+</table>
+
+{% endblock %}
