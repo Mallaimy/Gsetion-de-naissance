@@ -1,10 +1,10 @@
 {% extends 'naissances/layout.html' %}
 
 {% block content %}
-<h1>Liste des Meres...</h1>
+<h1>Liste des Peres...</h1>
 
 <div class="col-12 d-flex justify-content-end mb-2"> <a class="btn btn-primary sm " href="#">
-    Ajouter une mere
+    Ajouter un Pere
 </a>
 </div>
 <table class="table table-bordered table-striped table-hover">
@@ -23,15 +23,15 @@
     <tbody>
 
 
-       {% for mere  in  meres %}
+       {% for pere  in  peres %}
             <tr class="success">
-            <td>{{mere.id}}</td>
-            <td>{{mere.nom}}</td>
-            <td>{{mere.prenom}}</td>
-            <td>{{mere.genre}}</td>
-            <td>{{mere.date_naissance_mere}}</td>
-            <td>{{mere.lieu_naissance_mere}}</td>
-            <td>{{mere.fonction_mere}}</td>
+            <td>{{pere.id}}</td>
+            <td>{{pere.nom}}</td>
+            <td>{{pere.prenom}}</td>
+            <td>{{pere.genre}}</td>
+            <td>{{pere.date_naissance_pere}}</td>
+            <td>{{pere.lieu_naissance_pere}}</td>
+            <td>{{pere.fonction_pere}}</td>
             <td> 
                 <a class="btn btn-outline-primary sm" href="#">
                     Editer

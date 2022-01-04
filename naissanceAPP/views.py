@@ -1,15 +1,17 @@
 from django.db.models.query_utils import Q
 from django.http.response import HttpResponseRedirect
 from django.shortcuts import redirect, render
-import naissanceAPP
-
 from naissanceAPP.forms import EnfantForm
-from .models import Enfant,Mere
+from .models import Enfant,Mere, Pere
 
 
 def mere_list(request):
 	meres = Mere.objects.all().order_by('nom')
 	return render(request, 'naissances/mere_list.html', {'meres': meres})
+
+def pere_list(request):
+	peres = Pere.objects.all().order_by('nom')
+	return render(request, 'naissances/pere_list.html', {'peres': peres})
 
 
 def home(request):

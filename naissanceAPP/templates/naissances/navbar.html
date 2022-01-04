@@ -15,7 +15,7 @@
           </li>
 
           <li class="nav-item">
-            <a class="nav-link" href="#">Pere</a>
+            <a class="nav-link" href="{% url 'pere_list'}">Pere</a>
           </li>
           <li class="nav-item">
             <a class="nav-link" href="{% url 'meres-list' %}">Mere</a>
@@ -25,6 +25,11 @@
           </li>   
 
         </ul>
+        <form class="d-flex" method="get" action="{% url 'search-enfant' %}">
+          {% csrf_token %}
+        <input class="form-control me-2" type="search" placeholder="Rechercher un Enfant" name="query" aria-label="Rechercher">
+        <button class="btn btn-outline-primary" type="submit">Rechercher</button>
+      </form>
        
       </div>
     </div>
