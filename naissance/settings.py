@@ -76,11 +76,10 @@ WSGI_APPLICATION = 'naissance.wsgi.application'
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.postgresql',
+        'ENGINE': 'django.db.backends.mysql',
         'NAME': 'naissance_db',
-        'USER':'postgres',
-        'PASSWORD':'Abakar@1997',
-        'PORT':'5432',
+        'USER':'root',
+        'PASSWORD':'21Janvier1995!',
         'HOST':'127.0.0.1',
     }
 }
