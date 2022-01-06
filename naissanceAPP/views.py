@@ -1,13 +1,17 @@
 from django.db.models.query_utils import Q
 from django.http.response import HttpResponseRedirect
 from django.shortcuts import redirect, render
-from naissanceAPP.forms import EnfantForm
-from .models import Enfant,Mere, Pere
+from naissanceAPP.forms import EnfantForm, MereForm
+from .models import Enfant, Fonctionnaire,Mere, Pere
 
 
 def mere_list(request):
 	meres = Mere.objects.all().order_by('nom')
 	return render(request, 'naissances/mere_list.html', {'meres': meres})
+
+def Fonctionnaire_list(request):
+	fonctionnaires = Fonctionnaire.objects.all().order_by("nom")
+	return render(request, 'naissances/fonctionnaire_list.html', {'fonctionnaires':fonctionnaires})
 
 def pere_list(request):
 	peres = Pere.objects.all().order_by('nom')
@@ -80,4 +84,27 @@ def search_enfant(request):
 			else:
 				print('Not found ...')
 				return render(request, 'naissances/not_found.html', {})
-					
+
+#============================================================================================
+
+def Ajouter_mere(request):
+	submitted = False
+	if request.method == "POST":
+		form = MereForm(request.POST)
+		if form.is_valid():
+			form.save()
+			return HttpResponseRedirect('/ajouter_mere?submitted=True')
+	else:
+		form = MereForm
+		if 'submitted' in request.GET:
+			submitted=True
+		return render(request, 'naissances/ajouter_mere.html',  {'form': form, 'submitted': submitted})
+
+
+def Editer_mere(request, mere_id):
+	mere = Mere.objects.get(pk=mere_id)
+	form = MereForm(request.POST or None, instance=mere)
+	if form.is_valid():
+		form.save()
+		return redirect('mere_list')
+	return render(request, 'naissances/editer_mere.html',{'mere': mere,'form': form}) 
