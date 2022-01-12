@@ -1,8 +1,8 @@
 from django.db.models.query_utils import Q
 from django.http.response import HttpResponseRedirect
 from django.shortcuts import redirect, render
-from naissanceAPP.forms import EnfantForm
-from .models import Enfant,Mere, Pere
+from naissanceAPP.forms import EnfantForm, MereForm
+from .models import Enfant, Mere, Pere
 
 
 def mere_list(request):
@@ -42,6 +42,25 @@ def Ajouter_enfant(request):
 		return render(request, 'naissances/ajouter_enfant',  {'form': form, 'submitted': submitted})
 
 
+def Ajouter_mere(request):
+	submitted = False
+	if request.method == "POST":
+		form = MereForm(request.POST)
+		if form.is_valid():
+			form.save()
+			return HttpResponseRedirect('/Ajouter_mere?submitted=True')
+	else:
+		form = MereForm
+		if 'submitted' in request.GET:
+			submitted=True
+		
+		return render(request, 'naissances/ajouter_mere.html',  {'form': form, 'submitted': submitted})
+
+#Ajouter_mere
+
+
+
+
 
 def Editer_enfant(request, enfant_id):
 	enfant = Enfant.objects.get(pk=enfant_id)
@@ -54,12 +73,28 @@ def Editer_enfant(request, enfant_id):
 		'form': form,
 	}) 
 
+def Editer_mere(request, mere_id):
+	mere = Mere.objects.get(pk=mere_id)
+	form = MereForm(request.POST or None, instance=mere)
+	if form.is_valid():
+		form.save()
+		return redirect('meres-list')
+	return render(request, 'naissances/editer_mere.html',{
+			'mere': mere,
+		'form': form,
+	})
+
 
 
 def supprimer_enfant(request, enfant_id):
 	enfant = Enfant.objects.get(pk=enfant_id)
 	enfant.delete()
 	return redirect('enfants-list')
+
+def Supprimer_mere(request, mere_id):
+	mere = Mere.objects.get(pk=mere_id)
+	mere.delete()
+	return redirect('meres-list')
 
 def Montrer_enfant(request, enfant_id):
 	enfant = Enfant.objects.get(pk=enfant_id)

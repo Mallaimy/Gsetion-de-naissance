@@ -1,5 +1,5 @@
 from django import forms
-from naissanceAPP.models import Enfant
+from naissanceAPP.models import Enfant,Mere
 from django.forms import ModelForm
 
 
@@ -38,6 +38,41 @@ class EnfantForm(ModelForm):
     		'mere': forms.Select(attrs={'class': 'form-control', 'placeholder': 'nom du Pere',}),  
     		'pere': forms.Select(attrs={'class': 'form-control', 'placeholder': 'Nom de la mere',}), 
     		'fonctionnaire': forms.Select(attrs={'class': 'form-control', 'placeholder': 'Non du Fonctionnaire',}), 
+    		
+            
+    	}
+
+class MereForm(ModelForm):
+    class Meta:
+        model = Mere
+        fields = ( 
+                       
+                        "nom",
+                        "prenom",
+                        "genre",
+                        "date_naissance_mere",
+                        "lieu_naissance_mere",
+                        "fonction_mere", 
+                )
+  
+
+        labels = {
+                    "Nom":"",
+                    "Prenom":"",
+                    "Genre":"",
+                    "Date naissance mere":"",
+                    "Lieu naissance mere":"",
+                    "Fonction mere":"",
+    	        }
+
+        widgets = {
+    		'nom': forms.TextInput(attrs={'class': 'form-control', 'placeholder': 'Nom',}),  
+    		'prenom': forms.TextInput(attrs={'class': 'form-control', 'placeholder': 'Prenom',}), 
+    		'genre': forms.TextInput(attrs={'class': 'form-select', 'placeholder': 'Genre',}),
+            'date_naissance_mere': forms.DateInput(attrs={'class': 'form-control', 'placeholder': 'date naissance mere',}),
+            'lieu_naissance_mere': forms.TextInput(attrs={'class': 'form-control', 'placeholder': 'lieu naissance mere',}), 
+    		'fonction_mere': forms.TextInput(attrs={'class': 'form-control', 'placeholder': 'fonction mere',}), 
+       
     		
             
     	}

@@ -3,7 +3,7 @@
 {% block content %}
 <h1>Liste des Meres...</h1>
 
-<div class="col-12 d-flex justify-content-end mb-2"> <a class="btn btn-primary sm " href="#">
+<div class="col-12 d-flex justify-content-end mb-2"> <a class="btn btn-primary sm " href="{% url 'ajouter-mere' %}">
     Ajouter une mere
 </a>
 </div>
@@ -33,11 +33,11 @@
             <td>{{mere.lieu_naissance_mere}}</td>
             <td>{{mere.fonction_mere}}</td>
             <td> 
-                <a class="btn btn-outline-primary sm" href="#">
-                    Editer
+                <a class="btn btn-outline-primary sm" href="{% url 'editer-mere' mere.id %}">
+                    Editer 
               </a>
 
-              <a class="btn btn-outline-danger sm" href="#">
+              <a class="btn btn-outline-danger sm" href="{% url 'supprimer-mere' mere.id %}">
                 Supprimer
               </a>
 
