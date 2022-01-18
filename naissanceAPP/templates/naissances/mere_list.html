@@ -33,15 +33,16 @@
             <td>{{mere.lieu_naissance_mere}}</td>
             <td>{{mere.fonction_mere}}</td>
             <td> 
-                <a class="btn btn-outline-primary sm" href="#">
+                <a class="btn btn-outline-primary sm" href="{% url 'editer-mere' mere.id %}">
                     Editer
               </a>
+              </a>
 
-              <a class="btn btn-outline-danger sm" href="#">
+              <a class="btn btn-outline-danger sm" href="{% url 'supprimer-mere' mere.id %}">
                 Supprimer
               </a>
 
-              <a class="btn btn-outline-info sm" href="#">
+              <a class="btn btn-outline-info sm" href="{% url 'montrer-mere' mere.id %}">
                 Detailes
             </a>
 

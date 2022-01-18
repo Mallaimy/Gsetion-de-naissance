@@ -1,7 +1,7 @@
 from django.db.models.query_utils import Q
 from django.http.response import HttpResponseRedirect
 from django.shortcuts import redirect, render
-from naissanceAPP.forms import EnfantForm, MereForm
+from naissanceAPP.forms import EnfantForm, FonctionnaireForm, MereForm, PereForm
 from .models import Enfant, Fonctionnaire,Mere, Pere
 
 
@@ -30,20 +30,21 @@ def enfants_list(request):
 	return render(request, 'naissances/enfants_list.html', {'enfants': enfants})
 
 
-
-def Ajouter_enfant(request):
-	submitted = False
-	if request.method == "POST":
-		form = EnfantForm(request.POST)
-		if form.is_valid():
-			form.save()
-			return HttpResponseRedirect('/Ajouter_enfant?submitted=True')
-	else:
-		form = EnfantForm
-		if 'submitted' in request.GET:
-			submitted=True
-		
-		return render(request, 'naissances/ajouter_enfant',  {'form': form, 'submitted': submitted})
+def ajouter_enfant(request):
+    submitted = False
+    if request.method == "POST":
+        form = EnfantForm(request.POST)
+        if form.is_valid():
+            form.save()
+            return HttpResponseRedirect('/ajouter_enfant?submitted=True')
+    else:
+        form = EnfantForm
+        if 'submitted' in request.GET:
+            submitted=True
+    return render(request, 'naissances/ajouter_enfant.html', {
+        'form': form,
+        'submitted': submitted,
+    })
 
 
 
@@ -85,7 +86,7 @@ def search_enfant(request):
 				print('Not found ...')
 				return render(request, 'naissances/not_found.html', {})
 
-#============================================================================================
+#========================================= Mere ========================================================================
 
 def Ajouter_mere(request):
 	submitted = False
@@ -93,12 +94,12 @@ def Ajouter_mere(request):
 		form = MereForm(request.POST)
 		if form.is_valid():
 			form.save()
-			return HttpResponseRedirect('/ajouter_mere?submitted=True')
+			return HttpResponseRedirect ('/ajouter_mere?submitted=True')
 	else:
 		form = MereForm
 		if 'submitted' in request.GET:
 			submitted=True
-		return render(request, 'naissances/ajouter_mere.html',  {'form': form, 'submitted': submitted})
+		return render(request, 'naissances/ajouter_mere.html',  {'form': form, 'submitted': submitted,})
 
 
 def Editer_mere(request, mere_id):
@@ -106,5 +107,146 @@ def Editer_mere(request, mere_id):
 	form = MereForm(request.POST or None, instance=mere)
 	if form.is_valid():
 		form.save()
-		return redirect('mere_list')
-	return render(request, 'naissances/editer_mere.html',{'mere': mere,'form': form}) 
+		return redirect('meres-list')
+	return render(request, 'naissances/editer_mere.html',{
+			'mere': mere,
+		'form': form,
+	}) 
+
+
+def supprimer_mere(request, mere_id):
+	mere= Mere.objects.get(pk=mere_id)
+	mere.delete()
+	return redirect('meres-list')
+
+def Montrer_mere(request, mere_id):
+	mere = Mere.objects.get(pk=mere_id)
+	return render(request, 'naissances/montrer_mere.html', {
+		'mere': mere,
+	})
+
+
+def search_mere(request):
+	if request.method == "GET":
+			query = request.GET.get('query')
+			if query:
+				mutiple_q = Q(Q(nom__icontains=query) | Q(id__icontains=query))
+			mere = Mere.objects.filter(mutiple_q)
+			if mere:
+				return render(request, 'naissances/mere_list.html', {
+					'mere': mere
+				})
+			else:
+				print('Not found ...')
+				return render(request, 'naissances/not_found.html', {})
+
+#========================================= Pere ========================================================================
+
+def Ajouter_pere(request):
+	submitted = False
+	if request.method == "POST":
+		form = PereForm (request.POST)
+		if form.is_valid():
+			form.save()
+			return HttpResponseRedirect ('/ajouter_pere?submitted=True')
+	else:
+		form = PereForm
+		if 'submitted' in request.GET:
+			submitted=True
+		return render(request, 'naissances/ajouter_pere.html',  {'form': form, 'submitted': submitted,})
+
+
+
+def Editer_pere(request, pere_id):
+	pere = Pere.objects.get(pk=pere_id)
+	form = PereForm(request.POST or None, instance=pere)
+	if form.is_valid():
+		form.save()
+		return redirect('peres-list')
+	return render(request, 'naissances/editer_pere.html',{
+			'pere': pere,
+		'form': form,
+	}) 
+
+
+def supprimer_pere(request, pere_id):
+	pere = Pere.objects.get(pk=pere_id)
+	pere.delete()
+	return redirect('peres-list')
+
+
+def Montrer_pere(request, pere_id):
+	pere = Pere.objects.get(pk=pere_id)
+	return render(request, 'naissances/montrer_pere.html', {
+		'pere': pere,
+	})
+
+
+def search_enfant(request):
+	if request.method == "GET":
+			query = request.GET.get('query')
+			if query:
+				mutiple_q = Q(Q(nom__icontains=query) | Q(id__icontains=query))
+			enfants = Enfant.objects.filter(mutiple_q)
+			if enfants:
+				return render(request, 'naissances/enfants_list.html', {
+					'enfants': enfants
+				})
+			else:
+				print('Not found ...')
+				return render(request, 'naissances/not_found.html', {})
+
+#========================================= Pere ========================================================================
+
+def Ajouter_fonctionnaire(request):
+	submitted = False
+	if request.method == "POST":
+		form = FonctionnaireForm (request.POST)
+		if form.is_valid():
+			form.save()
+			return HttpResponseRedirect ('/ajouter_fonctionnaire?submitted=True')
+	else:
+		form = FonctionnaireForm
+		if 'submitted' in request.GET:
+			submitted=True
+		return render(request, 'naissances/ajouter_fonctionnaire.html',  {'form': form, 'submitted': submitted,})
+
+
+def Editer_fonctionnaire(request, fonctionnaire_id):
+	fonctionnaire = Fonctionnaire.objects.get(pk=fonctionnaire_id)
+	form = FonctionnaireForm(request.POST or None, instance=fonctionnaire)
+	if form.is_valid():
+		form.save()
+		return redirect('fonctionnaires-list')
+	return render(request, 'naissances/editer_fonctionnaires.html',{
+			'fonctionnaire': fonctionnaire,
+		'form': form,
+	}) 
+
+
+def supprimer_fonctionnaire(request, fonctionnaire_id):
+	fonctionnaire = Fonctionnaire.objects.get(pk=fonctionnaire_id)
+	fonctionnaire.delete()
+	return redirect('fonctionnaires-list')
+
+
+def Montrer_fonctionnaire(request, fonctionnaire_id):
+	fonctionnaire = Fonctionnaire.objects.get(pk=fonctionnaire_id)
+	return render(request, 'naissances/montrer_fonctionnaire.html', {
+		'fonctionnaire': fonctionnaire,
+	})
+
+
+def search_enfant(request):
+	if request.method == "GET":
+			query = request.GET.get('query')
+			if query:
+				mutiple_q = Q(Q(nom__icontains=query) | Q(id__icontains=query))
+			enfants = Enfant.objects.filter(mutiple_q)
+			if enfants:
+				return render(request, 'naissances/enfants_list.html', {
+					'enfants': enfants
+				})
+			else:
+				print('Not found ...')
+				return render(request, 'naissances/not_found.html', {})

@@ -1,5 +1,5 @@
 from django import forms
-from naissanceAPP.models import Enfant, Mere
+from naissanceAPP.models import Enfant, Fonctionnaire, Mere, Pere
 from django.forms import ModelForm
 
 
@@ -73,6 +73,67 @@ class MereForm(ModelForm):
             'lieu_naissance_mere': forms.TextInput(attrs={'class': 'form-control', 'placeholder': 'Lieu de naissance',}),
     		'fonction_mere': forms.TextInput(attrs={'class': 'form-control', 'placeholder': 'Fonction de la mere',}),    
     	}
+
+
+class PereForm(ModelForm):
+    class Meta:
+        model = Pere
+        fields = ( 
+                       
+                        "nom",
+                        "prenom",
+                        "genre",
+                        "date_naissance_pere",
+                        "lieu_naissance_pere",
+                        "fonction_pere"
+                )
+
+        labels = {
+                    "nom":"",
+                    "prenom":"",
+                    "genre":"",
+                    "date_naissance_pere":"",
+                    "lieu_naissance_pere":"",
+                    "fonction_pere":""
+    	        }
+
+        widgets = {
+    		'nom': forms.TextInput(attrs={'class': 'form-control', 'placeholder': 'Nom',}),  
+    		'prenom': forms.TextInput(attrs={'class': 'form-control', 'placeholder': 'Prenom',}), 
+    		'genre': forms.TextInput(attrs={'class': 'form-select', 'placeholder': 'Genre',}),
+            'date_naissance_pere': forms.DateInput(attrs={'class': 'form-control', 'placeholder': 'Date naissance',}),
+            'lieu_naissance_pere': forms.TextInput(attrs={'class': 'form-control', 'placeholder': 'Lieu de naissance',}),
+    		'fonction_pere': forms.TextInput(attrs={'class': 'form-control', 'placeholder': 'Fonction du pere',}),    
+    	}
+
+class FonctionnaireForm(ModelForm):
+    class Meta:
+        model = Fonctionnaire
+        fields = ( 
+                       
+                        "nom",
+                        "prenom",
+                        "genre",
+                        "telephone",
+                        "poste"
+                )
+
+        labels = {
+                    "nom":"",
+                    "prenom":"",
+                    "genre":"",
+                    "telephone":"",
+                    "poste":"",
+    	        }
+
+        widgets = {
+    		'nom': forms.TextInput(attrs={'class': 'form-control', 'placeholder': 'Nom',}),  
+    		'prenom': forms.TextInput(attrs={'class': 'form-control', 'placeholder': 'Prenom',}), 
+    		'genre': forms.TextInput(attrs={'class': 'form-select', 'placeholder': 'Genre',}),
+            'telephone': forms.TextInput(attrs={'class': 'form-control', 'placeholder': 'Numéro de telephone',}),
+            'poste': forms.TextInput(attrs={'class': 'form-control', 'placeholder': 'Le Poste du Fonctionnaire',}),    
+    	}
+
 
 
 

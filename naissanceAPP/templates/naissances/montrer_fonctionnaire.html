@@ -1,0 +1,52 @@
+{%extends 'naissances/layout.html' %}
+
+{%block content%}
+<div class="row">
+    <div class="col-sm-2"></div>
+    
+  
+<div class="shadow p-4 mb-5 bg-body rounded col-md-8">
+    <center>
+
+        <h1>Details  du Fonctionnaire...</h1>
+    </br>
+<!--{% comment %} 
+    {% for mere in mere.all %}
+       {{mere}}
+    {% endfor %}
+ {% endcomment %}-->
+    <table class="table table-bordered table-striped table-hover">
+        <tbody>            
+          <tr class="success"> 
+            
+            <td><strong>ID: </strong>{{fonctionnaire.id}}</td>
+          </tr>
+
+            <tr class="success"> 
+            <td><strong>Nom :</strong> {{fonctionnaire.nom}}</td>
+            </tr>
+            <tr class="success">
+            <td><strong> Prenom:</strong> {{fonctionnaire.prenom}}</td>
+            </tr>
+
+            <tr class="success"> 
+            <td><strong>Genre:</strong> {{fonctionnaire.genre}}</td>
+          </tr>
+
+            <tr class="success"> 
+            <td><strong>Date de naissance:</strong> {{fonctionnaire.telephone}}</td>
+          </tr>
+
+          
+          <tr class="success"> 
+            <td><strong>Lieu de naissance:</strong> {{fonctionnaire.poste}}</td>
+           </tr>
+
+        </tbody>
+    </table>
+    </div>
+
+    </center>
+</div>
+</div> 
+{%endblock%}

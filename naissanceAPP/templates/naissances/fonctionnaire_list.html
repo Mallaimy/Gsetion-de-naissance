@@ -3,9 +3,9 @@
 {% block content %}
 <h1>Liste des Fonctionnaire...</h1>
 
-<div class="col-12 d-flex justify-content-end mb-2"> <a class="btn btn-primary sm " href="#">
-    Ajouter un Fonctionnaire
-</a>
+<div class="col-12 d-flex justify-content-end mb-2"> <a class="btn btn-primary sm " href="{% url 'ajouter-fonctionnaire'%}">
+        Ajouter un Fonctionnaire
+    </a>
 </div>
 <table class="table table-bordered table-striped table-hover">
     <thead class="table-dark">
@@ -16,35 +16,35 @@
             <th>poste</th>
             <th>Téléphone</th>
             <th>Actions</th>
-        </tr> 
+        </tr>
     </thead>
     <tbody>
-       {% for Fonctionnaire  in  fonctionnaires %}
-            <tr class="success">
+        {% for fonctionnaire  in  fonctionnaires %}
+        <tr class="success">
             <td>{{fonctionnaire.id}}</td>
             <td>{{fonctionnaire.nom}}</td>
             <td>{{fonctionnaire.prenom}}</td>
             <td>{{fonctionnaire.poste}}</td>
             <td>{{fonctionnaire.telephone}}</td>
             <td>
-                <a class="btn btn-outline-primary sm" href="#">
+                <a class="btn btn-outline-primary sm" href="{% url 'editer-fonctionnaire' fonctionnaire.id %}">
                     Editer
-              </a>
+                </a>
 
-              <a class="btn btn-outline-danger sm" href="#">
-                Supprimer
-              </a>
+                <a class="btn btn-outline-danger sm" href="{%  url 'supprimer-fonctionnaire' fonctionnaire.id %}">
+                    Supprimer
+                </a>
 
-              <a class="btn btn-outline-info sm" href="#">
-                Detailes
-            </a>
+                <a class="btn btn-outline-info sm" href="{%  url 'montrer-fonctionnaire' fonctionnaire.id %}">
+                    Detailes
+                </a>
 
             </td>
         </tr>
         {% endfor %}
     </tbody>
 
-    
+
 </table>
 
 {% endblock %}

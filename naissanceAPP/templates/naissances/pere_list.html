@@ -3,7 +3,7 @@
 {% block content %}
 <h1>Liste des Peres...</h1>
 
-<div class="col-12 d-flex justify-content-end mb-2"> <a class="btn btn-primary sm " href="#">
+<div class="col-12 d-flex justify-content-end mb-2"> <a class="btn btn-primary sm " href="{% url 'ajouter_pere' %}">
     Ajouter un Pere
 </a>
 </div>
@@ -33,15 +33,15 @@
             <td>{{pere.lieu_naissance_pere}}</td>
             <td>{{pere.fonction_pere}}</td>
             <td> 
-                <a class="btn btn-outline-primary sm" href="#">
+                <a class="btn btn-outline-primary sm" href="{% url 'editer-pere' pere.id %}">
                     Editer
               </a>
 
-              <a class="btn btn-outline-danger sm" href="#">
+              <a class="btn btn-outline-danger sm" href="{% url 'supprimer-pere' pere.id %}">
                 Supprimer
               </a>
 
-              <a class="btn btn-outline-info sm" href="#">
+              <a class="btn btn-outline-info sm" href="{% url 'montrer-pere' pere.id %}">
                 Detailes
             </a>
 
